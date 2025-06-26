@@ -22,7 +22,7 @@ const globalStyles = StyleSheet.create({
     padding: 14,
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: "#93569D",
+    backgroundColor: "#DB7093",
     borderRadius: 10
   },
   buttonText: {

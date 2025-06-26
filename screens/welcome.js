@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
       fontSize: 18,
       fontFamily: 'WorkSans-Light',
       lineHeight: 25,
-      paddingBottom: 18,
+      paddingBottom: 10,
     }
 })
 

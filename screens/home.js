@@ -13,7 +13,6 @@ const Home = ({ navigation }) => {
         <View style={styles.introBlock}>
             <Header 
               title="Rapid Recipes"
-              paddingBottom={6}
             />
             <Text style={styles.subHeading}>Tasty Creations in Minutes!</Text>
             <Pressable style={globalStyles.button} onPress={() => navigation.push('Welcome')}>
@@ -32,12 +31,14 @@ const styles = StyleSheet.create({
   introBlock: {
     flex: 1,
     marginTop: 200,
-    alignItems: "center"
+    alignItems: "center",
+    gap: 6
   },
   subHeading: {
     fontSize:  20,
-    fontFamily: 'SourGummy-Regular',
-    marginBottom: 26,
+    fontFamily: 'SourGummy-LightItalic',
+    color: '#DEB887',
+    paddingBottom: 10,
   },
 })
 

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'WorkSans-ExtraBold',
     fontSize: 40,
-    color: "#44bcb7",
+    color: "#5F9EA0",
   }
 })
 

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     gap: 24,
     alignItems: 'center',
     paddingHorizontal: 16,
-    backgroundColor: '#44bcb7',
+    backgroundColor: '#5F9EA0',
   },
   heading: {
     fontSize: 20,

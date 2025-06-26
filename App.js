@@ -16,7 +16,8 @@ const App = () => {
     'WorkSans-Medium': require('./assets/fonts/WorkSans-Medium.ttf'),
     'WorkSans-Regular': require('./assets/fonts/WorkSans-Regular.ttf'),
     'WorkSans-Light': require('./assets/fonts/WorkSans-Light.ttf'),
-    'SourGummy-Regular': require('./assets/fonts/SourGummy-Regular.ttf'),
+    'SourGummy-Light': require('./assets/fonts/SourGummy-Light.ttf'),
+    'SourGummy-LightItalic': require('./assets/fonts/SourGummy-LightItalic.ttf'),
   })
 
   useEffect(() => {

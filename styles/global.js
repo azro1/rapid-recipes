@@ -19,7 +19,7 @@ const globalStyles = StyleSheet.create({
     lineHeight: 20
   },
   button: {
-    padding: 12,
+    padding: 14,
     paddingLeft: 16,
     paddingRight: 16,
     backgroundColor: "#93569D",

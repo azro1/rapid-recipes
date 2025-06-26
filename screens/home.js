@@ -20,7 +20,6 @@ const Home = ({ navigation }) => {
               <Text style={globalStyles.buttonText}>Explore Our Recipes</Text>
             </Pressable>
         </View>
-
     </View>
   )
 }
@@ -31,14 +30,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   introBlock: {
+    flex: 1,
     marginTop: 200,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "center"
   },
   subHeading: {
-    fontSize: 20,
-    fontFamily: 'WorkSans-Light',
-    marginBottom: 20
+    fontSize:  20,
+    fontFamily: 'SourGummy-Regular',
+    marginBottom: 26,
   },
 })
 

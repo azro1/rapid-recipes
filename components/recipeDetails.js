@@ -25,7 +25,7 @@ const RecipeDetails = ({ recipeData }) => {
             <Text style={styles.header}>Ingredients</Text>
             <View style={styles.sectionList}>
               {getIngredients(item).map((ingredient, idx) => (
-                <Text key={idx} style={styles.sectionItem}>{ingredient}</Text>
+                <Text key={idx} style={styles.sectionItem}>{`\u2022 ${ingredient}`}</Text>
               ))}
             </View>
             <View style={styles.instructionsContainer}>
@@ -67,15 +67,18 @@ const styles = StyleSheet.create({
   recipeWrapper: {
     paddingHorizontal: 12,
     maxWidth: 1960,
-    marginHorizontal: 'auto'
+    marginHorizontal: 'auto',
+    width: '100%',
+    flexGrow: 1,
   },
   recipeList: {
     paddingBottom: 40,
+    width: '100%'
   },
   categoryWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4, 
+    gap: 4,
     marginTop: 20,
     paddingBottom: 8,
   },
@@ -85,12 +88,13 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     maxWidth: 380,
+    width: '100%',
   },
   recipeImage: {
-    width: "100%",
+    width: '100%',
     height: 350,
-    objectFit: 'contain',
-    alignSelf: 'start',
+    resizeMode: 'cover',
+    alignSelf: 'center',
   },
   recipeInfo: {
     marginTop: 8,
@@ -108,15 +112,19 @@ const styles = StyleSheet.create({
     fontFamily: 'WorkSans-Light',
   },
   instructionsContainer: {
-    marginTop: 30
+    marginTop: 30,
+    gap: 6
   },
   instructions: {
-    marginTop: 20
   },
   instructionsText: {
     fontSize: 16,
     fontFamily: 'WorkSans-Light',
     lineHeight: 24,
+    flexWrap: 'wrap',
+    flexShrink: 1,
+    overflowWrap: 'break-word',
+    wordBreak: 'break-word',
   },
   linkContainer: {
     marginTop: 20,
@@ -125,9 +133,10 @@ const styles = StyleSheet.create({
     gap: 6,
     flexWrap: 'wrap',
   },
-  linkWrapper: { 
-    flexShrink: 1, 
-    wordWrap: 'break-word' 
+  linkWrapper: {
+    flexShrink: 1,
+    overflowWrap: 'break-word',
+    wordBreak: 'break-word',
   },
   link: {
     fontSize: 16,

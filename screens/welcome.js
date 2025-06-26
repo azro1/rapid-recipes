@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
       paddingHorizontal: 12,
     },
     content: {
-      marginTop: 120,
+      flex: 1,
+      marginTop: 160,
       gap: 10,
       alignItems: 'center',
     },

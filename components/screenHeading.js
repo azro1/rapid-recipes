@@ -21,7 +21,7 @@ const ScreenHeading = ({ showBackButton, navigation, screen }) => {
 
 const styles = StyleSheet.create({
   headingContainer: {
-    height: 80,
+    height: 74,
     width: '100%',
     flexDirection: 'row',
     gap: 24,

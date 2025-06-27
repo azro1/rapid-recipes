@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   subHeading: {
     fontSize:  20,
     fontFamily: 'SourGummy-LightItalic',
-    color: '#DEB887',
+    color: '#adb05b',
     paddingBottom: 10,
   },
 })

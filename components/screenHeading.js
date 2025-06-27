@@ -21,13 +21,13 @@ const ScreenHeading = ({ showBackButton, navigation, screen }) => {
 
 const styles = StyleSheet.create({
   headingContainer: {
-    height: 74,
+    height: 70,
     width: '100%',
     flexDirection: 'row',
     gap: 24,
     alignItems: 'center',
     paddingHorizontal: 16,
-    backgroundColor: '#5F9EA0',
+    backgroundColor: '#44bcb7',
   },
   heading: {
     fontSize: 20,
@@ -36,7 +36,5 @@ const styles = StyleSheet.create({
     color: '#fff',
   }
 })
-
-
 
 export default ScreenHeading

@@ -10,7 +10,7 @@ import MainStackScreen from './mainStack';
 const RootDrawerNavigator = () => {
   return (
 <Drawer.Navigator screenOptions={{ 
-      drawerActiveTintColor: "#DEB887",
+      drawerActiveTintColor: "#adb05b",
       headerStyle: {
         backgroundColor: "#44bcb7"
       },

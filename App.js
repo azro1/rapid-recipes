@@ -3,7 +3,10 @@ import { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+
+const navTheme = DefaultTheme;
+navTheme.colors.background = '#fff';
 
 // drawer
 import RootDrawerNavigator from './routes/drawer'
@@ -16,8 +19,7 @@ const App = () => {
     'WorkSans-Medium': require('./assets/fonts/WorkSans-Medium.ttf'),
     'WorkSans-Regular': require('./assets/fonts/WorkSans-Regular.ttf'),
     'WorkSans-Light': require('./assets/fonts/WorkSans-Light.ttf'),
-    'SourGummy-Light': require('./assets/fonts/SourGummy-Light.ttf'),
-    'SourGummy-LightItalic': require('./assets/fonts/SourGummy-LightItalic.ttf'),
+    'KirangHaerang-Regular': require('./assets/fonts/KirangHaerang-Regular.ttf'),
   })
 
   useEffect(() => {
@@ -34,7 +36,9 @@ const App = () => {
   }
 
     return (
-      <NavigationContainer>
+      <NavigationContainer
+        theme={navTheme}
+        >
         <StatusBar />
         <RootDrawerNavigator />
       </NavigationContainer>

@@ -12,12 +12,12 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
         <View style={styles.introBlock}>
             <Image
-              source={require('../assets/images/cupcake.png')}
-              style={{ width: 100, height: 100,  }}
+              source={require('../assets/images/pasta.png')}
+              style={{ width: 84, height: 84,  }}
             />
             <Header 
               title="Rapid Recipes"
-              fontSize={34}
+              fontSize={38}
             />
             <Text style={styles.subHeading}>Tasty Creations in Minutes!</Text>
             <Pressable style={globalStyles.button} onPress={() => navigation.push('Welcome')}>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize:  20,
     fontFamily: 'KirangHaerang-Regular',
     color: '#A1866F',
-    paddingBottom: 16,
+    paddingBottom: 20,
   },
 })
 

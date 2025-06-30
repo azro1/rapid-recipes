@@ -59,8 +59,7 @@ const Recipe = ({ route }) => {
     <View style={styles.recipeContainer}>
       <Header 
         marginTop={16}
-        paddingBottom={14}
-        fontSize={26}
+        fontSize={30}
         title={dish} 
       />
       {error && <Text style={globalStyles.error}>{error}</Text>}

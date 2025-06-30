@@ -22,7 +22,7 @@ const DishList = ({ name, dishes, getDish }) => {
     <View style={styles.dishesContainer}>
       <Header 
         marginTop={16} 
-        fontSize={26} 
+        fontSize={30} 
         title={`Our ${name} Dishes`} 
       />
       <Text style={styles.leadText}>
@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
   },
   leadText: {
     paddingTop: 6,
-    paddingBottom: 12,
+    paddingBottom: 16,
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'WorkSans-Light',
-    lineHeight: 23,
+    lineHeight: 25,
   },
   flatlistWrapper: {
     flex: 1,
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
   },
   dishName: {
     textAlign: 'center',
-    fontSize: 16,
-    fontFamily: 'WorkSans-light',
+    fontSize: 18,
+    fontFamily: 'WorkSans-Regular',
     padding: 10,
   },
 });

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     fontSize:  20,
     fontFamily: 'KirangHaerang-Regular',
     color: '#A1866F',
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
 })
 

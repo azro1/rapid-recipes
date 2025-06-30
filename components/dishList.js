@@ -1,36 +1,57 @@
-import { StyleSheet, View, Text, ScrollView, Image, Dimensions, Pressable } from 'react-native'
+import { StyleSheet, View, Text, FlatList, Image, Pressable, useWindowDimensions } from 'react-native';
 
-// components
 import Header from '../components/header';
 import Card from './card';
 
-// get width and height of device window from Dimensions component to allow elements occupy full width and height of device in their containers 
-// const width = Dimensions.get('window').width; 
-// const height = Dimensions.get('window').height;
+const maxColumns = 5;
+const gap = 20; // space between items
 
 const DishList = ({ name, dishes, getDish }) => {
+  const { width: screenWidth } = useWindowDimensions();
+
+  const responsiveColumns = Math.min(
+    Math.floor(screenWidth / 380),
+    maxColumns
+  ) || 1;
+
+  // Calculate item width by subtracting total gaps from width, then dividing by columns
+  const totalGapWidth = gap * (responsiveColumns - 1);
+  const itemWidth = (screenWidth - totalGapWidth - 24 /* paddingHorizontal from container */) / responsiveColumns;
 
   return (
     <View style={styles.dishesContainer}>
-      <Header
-        marginTop={16}
-        fontSize={30}
-        title={`Our ${name} Dishes`}
+      <Header 
+        marginTop={16} 
+        fontSize={26} 
+        title={`Our ${name} Dishes`} 
       />
-      <Text style={styles.leadText}>Explore our delicious collection of {name} dishes with easy-to-follow recipes bursting with flavor!</Text>
-      <ScrollView contentContainerStyle={styles.dishListWrapper}>
-        {dishes.map((item) => (
-          <Pressable key={item.dish_id} style={styles.dishList} onPress={() => getDish(item.dish, item.dish_id)} >
-            <Card>
-              <Image style={styles.thumbnail} source={{ uri: item.image_url}} />
-              <Text style={styles.dishName} numberOfLines={1} ellipsizeMode="tail">{item.dish}</Text>
-            </Card>
-          </Pressable>
-        ))}
-      </ScrollView>
+      <Text style={styles.leadText}>
+        Explore our delicious collection of {name} dishes with easy-to-follow recipes bursting with flavor!
+      </Text>
+      <View style={styles.flatlistWrapper}>
+        <FlatList
+          data={dishes}
+          keyExtractor={(item) => item.dish_id}
+          numColumns={responsiveColumns}
+          showsVerticalScrollIndicator={false}
+          columnWrapperStyle={responsiveColumns > 1 ? { justifyContent: 'flex-start', gap } : undefined}
+          renderItem={({ item }) => (
+            <Pressable style={[styles.dishList, { width: itemWidth }]} onPress={() => getDish(item.dish, item.dish_id)}>
+              <Card>
+                <Image style={styles.thumbnail} source={{ uri: item.image_url }} resizeMode="cover" />
+                <Text style={styles.dishName} numberOfLines={1} ellipsizeMode="tail">
+                  {item.dish}
+                </Text>
+              </Card>
+            </Pressable>
+          )}
+          style={{ flex: 1, width: '100%', maxWidth: responsiveColumns * itemWidth + gap * (responsiveColumns - 1) }}
+          key={responsiveColumns} // re-render on column change
+        />
+      </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   dishesContainer: {
@@ -39,35 +60,31 @@ const styles = StyleSheet.create({
   },
   leadText: {
     paddingTop: 6,
-    paddingBottom: 16,
-    textAlign: "center",
-    fontSize: 18,
+    paddingBottom: 12,
+    textAlign: 'center',
+    fontSize: 16,
     fontFamily: 'WorkSans-Light',
-    lineHeight: 25
+    lineHeight: 23,
   },
-  dishListWrapper: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: 20
+  flatlistWrapper: {
+    flex: 1,
+    alignItems: 'center',
   },
   dishList: {
-    width: '100%',
-    maxWidth: 380,
     marginBottom: 40,
   },
   thumbnail: {
-    width: "100%",
+    width: '100%',
     height: 350,
-    objectFit: 'contain',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   dishName: {
     textAlign: 'center',
-    fontSize: 18,
-    fontFamily: 'WorkSans-Regular',
-    padding: 10
+    fontSize: 16,
+    fontFamily: 'WorkSans-light',
+    padding: 10,
   },
 });
 
-export default DishList
+export default DishList;
+

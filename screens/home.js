@@ -12,11 +12,12 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
         <View style={styles.introBlock}>
             <Image
-              source={require('../assets/images/cheeseburger.png')}
-              style={{ width: 60, height: 60, marginBottom: 6 }}
+              source={require('../assets/images/cupcake.png')}
+              style={{ width: 100, height: 100,  }}
             />
             <Header 
               title="Rapid Recipes"
+              fontSize={34}
             />
             <Text style={styles.subHeading}>Tasty Creations in Minutes!</Text>
             <Pressable style={globalStyles.button} onPress={() => navigation.push('Welcome')}>
@@ -33,15 +34,14 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   introBlock: {
-    flex: 1,
     marginTop: 200,
     alignItems: "center",
   },
   subHeading: {
-    fontSize:  22,
+    fontSize:  20,
     fontFamily: 'KirangHaerang-Regular',
     color: '#A1866F',
-    paddingBottom: 14,
+    paddingBottom: 16,
   },
 })
 

@@ -11,7 +11,8 @@ const Welcome = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Header 
-          fontSize={30} 
+          fontSize={30}
+          paddingBottom={6}
           title='Welcome to Rapid Recipes'
         />
         <Text style={styles.leadText}> Welcome to a world of flavors! Explore our diverse selection of recipes categorized by cuisine, dietary preferences, and meal types. Select a category and let the cooking adventure begin!</Text>
@@ -30,16 +31,15 @@ const styles = StyleSheet.create({
       paddingHorizontal: 12,
     },
     content: {
-      flex: 1,
-      marginTop: 160,
-      gap: 10,
+      marginTop: 200,
       alignItems: 'center',
+      gap: 6
     },
     leadText: {
       textAlign: "center",
-      fontSize: 18,
+      fontSize: 16,
       fontFamily: 'WorkSans-Light',
-      lineHeight: 25,
+      lineHeight: 23,
       paddingBottom: 10,
     }
 })

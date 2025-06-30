@@ -2,7 +2,7 @@ import { StyleSheet, Text, Pressable, Image, useWindowDimensions, FlatList } fro
 import Card from './card';
 
 const CARD_WIDTH = 180;
-const GAP = 20;
+const GAP = 10;
 
 const CategoryList = ({ recipeData, getCatTitle }) => {
   const { width: screenWidth } = useWindowDimensions();

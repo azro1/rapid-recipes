@@ -11,10 +11,6 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
         <View style={styles.introBlock}>
-            <Image
-              source={require('../assets/images/pasta.png')}
-              style={{ width: 84, height: 84,  }}
-            />
             <Header 
               title="Rapid Recipes"
               fontSize={38}
@@ -41,7 +37,7 @@ const styles = StyleSheet.create({
     fontSize:  20,
     fontFamily: 'KirangHaerang-Regular',
     color: '#A1866F',
-    paddingBottom: 10,
+    paddingBottom: 16,
   },
 })
 

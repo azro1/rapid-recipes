@@ -14,7 +14,7 @@ const Welcome = ({ navigation }) => {
           fontSize={30} 
           title='Welcome to Rapid Recipes'
         />
-        <Text style={styles.leadText}> Welcome to a world of flavors! Explore our diverse selection of recipes categorized by cuisine, dietary preferences, and meal types. Select a category and let the cooking adventure begin!</Text>
+        <Text style={styles.leadText}>Explore our diverse selection of recipes categorized by cuisine, dietary preferences, and meal types. Select a category and let the cooking adventure begin!</Text>
 
         <Pressable style={globalStyles.button} onPress={() => navigation.navigate('Categories')} >
             <Text style={globalStyles.buttonText}>Choose a Category</Text>

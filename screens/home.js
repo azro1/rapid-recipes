@@ -11,9 +11,15 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
         <View style={styles.introBlock}>
+            <Image 
+              source={require('../assets/images/salad.png')} 
+              style={{ width: 90, height: 90 }} 
+              resizeMode="contain" 
+            />
             <Header 
               title="Rapid Recipes"
-              fontSize={38}
+              fontSize={34}
+              paddingBottom={2}
             />
             <Text style={styles.subHeading}>Tasty Creations in Minutes!</Text>
             <Pressable style={globalStyles.button} onPress={() => navigation.push('Welcome')}>
@@ -30,14 +36,14 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   introBlock: {
-    marginTop: 200,
+    marginTop: 148,
     alignItems: "center",
   },
   subHeading: {
-    fontSize:  20,
+    fontSize:  24,
     fontFamily: 'KirangHaerang-Regular',
-    color: '#A1866F',
-    paddingBottom: 16,
+    color: '#A27035',
+    paddingBottom: 14,
   },
 })
 

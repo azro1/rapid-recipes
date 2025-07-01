@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
       textAlign: "center",
       fontSize: 18,
       fontFamily: 'WorkSans-Light',
-      lineHeight: 25,
-      paddingBottom: 10,
+      lineHeight: 26,
+      paddingBottom: 8,
+      color: '#4A4A4A',
     }
 })
 

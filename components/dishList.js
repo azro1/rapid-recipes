@@ -22,7 +22,7 @@ const DishList = ({ name, dishes, getDish }) => {
     <View style={styles.dishesContainer}>
       <Header 
         marginTop={16} 
-        fontSize={30} 
+        fontSize={28} 
         title={`Our ${name} Dishes`} 
       />
       <Text style={styles.leadText}>
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'WorkSans-Light',
     lineHeight: 25,
+    color: '#4A4A4A',
   },
   flatlistWrapper: {
     flex: 1,
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'WorkSans-Regular',
     padding: 10,
+    color: '#4A4A4A',
   },
 });
 

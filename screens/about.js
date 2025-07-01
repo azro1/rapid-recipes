@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
       paddingBottom: 18,
       fontSize: 18,
       fontFamily: 'WorkSans-Light',
-      lineHeight: 30,
+      lineHeight: 25,
+      color: '#4A4A4A',
     }
 })
 export default About

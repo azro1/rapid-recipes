@@ -24,14 +24,14 @@ const styles = StyleSheet.create({
     height: 70,
     width: '100%',
     flexDirection: 'row',
-    gap: 24,
+    gap: 16,
     alignItems: 'center',
     paddingHorizontal: 16,
-    backgroundColor: '#44bcb7',
+    backgroundColor: '#3A5743',
   },
   heading: {
-    fontSize: 20,
-    fontFamily: 'WorkSans-medium',
+    fontSize: 18,
+    fontFamily: 'WorkSans-regular',
     flexShrink: 1,
     color: '#fff',
   }

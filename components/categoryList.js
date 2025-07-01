@@ -48,9 +48,10 @@ const styles = StyleSheet.create({
   },
   previewTitle: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'WorkSans-Regular',
-    marginTop: 8,
+    marginTop: 4,
+    color: '#4A4A4A',
   },
 });
 

@@ -6,7 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 const navTheme = DefaultTheme;
-navTheme.colors.background = '#fff';
+navTheme.colors.background = '#FFFCF5';
 
 // drawer
 import RootDrawerNavigator from './routes/drawer'

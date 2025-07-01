@@ -52,10 +52,10 @@ const Categories = ({ navigation }) => {
   
   return (
     <View style={styles.categoriesContainer}>
-      <View style={{ flex: 1, marginTop: screenWidth > 992 ? 160 : 0 }}>
+      <View style={{ flex: 1, marginTop: screenWidth > 992 ? 128 : 0 }}>
         <Header
           marginTop={16}
-          fontSize={30}
+          fontSize={28}
           title='Select a Category'
         />
         <Text style={styles.leadText}>Choose from our recipe categories to find your next delicious meal</Text>
@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     fontFamily: 'WorkSans-Light',
-    lineHeight: 25
+    lineHeight: 25,
+    color: '#4A4A4A',
   }
 })
 

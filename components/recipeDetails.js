@@ -79,12 +79,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    marginTop: 20,
+    marginTop: 12,
     paddingBottom: 8,
   },
   category: {
     fontFamily: 'WorkSans-Light',
     fontSize: 16,
+    color: '#4A4A4A',
   },
   imageWrapper: {
     maxWidth: 380,
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 16,
     fontFamily: 'WorkSans-Medium',
+    color: '#4A4A4A',
   },
   sectionList: {
     marginTop: 20,
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
   sectionItem: {
     fontSize: 16,
     fontFamily: 'WorkSans-Light',
+    color: '#4A4A4A',
   },
   instructionsContainer: {
     marginTop: 30,
@@ -125,6 +128,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     overflowWrap: 'break-word',
     wordBreak: 'break-word',
+    color: '#4A4A4A',
   },
   linkContainer: {
     marginTop: 20,

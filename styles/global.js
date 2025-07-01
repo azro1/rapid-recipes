@@ -16,13 +16,14 @@ const globalStyles = StyleSheet.create({
   },
   paragraph: {
     marginVertical: 8,
-    lineHeight: 20
+    lineHeight: 20,
+    color: '#3A3A3A'
   },
   button: {
     padding: 14,
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: "#de91d5",
+    backgroundColor: "#D94F30",
     borderRadius: 10
   },
   buttonText: {

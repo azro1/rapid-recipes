@@ -45,7 +45,7 @@ const Categories = ({ navigation }) => {
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size={50} color="#44bcb7" />
+        <ActivityIndicator size={50} color="#3A5743" />
       </View>
     )
   }

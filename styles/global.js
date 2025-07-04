@@ -30,7 +30,7 @@ const globalStyles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontFamily: 'WorkSans-Bold',
-    letterSpacing: 0.5,
+    letterSpacing: 0.2,
   },
   error: {
     marginTop: 20,

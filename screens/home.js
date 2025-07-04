@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     fontFamily: 'KirangHaerang-Regular',
     color: '#A27035',
     paddingBottom: 14,
+    letterSpacing: 0.4
   },
 })
 

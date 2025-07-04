@@ -29,7 +29,8 @@ const globalStyles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 18,
-    fontFamily: 'WorkSans-Bold'
+    fontFamily: 'WorkSans-Bold',
+    letterSpacing: 0.5,
   },
   error: {
     marginTop: 20,

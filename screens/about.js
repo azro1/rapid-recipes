@@ -18,7 +18,8 @@ const About = ({ navigation }) => {
         <View style={styles.intro}>
             <Header 
               fontSize={30}
-              title='About Rapid Recipes' 
+              title='About Rapid Recipes'
+              align="left"
             />
               <Text style={styles.text}>At Rapid Recipes, we believe cooking should be fast, simple, and enjoyable—no excuses, no nonsense. Our app is built for real people who want great meals without the hassle. We bring you quick, reliable recipes that get you from hungry to satisfied in no time. No complicated jargon or fancy chef tricks—just straightforward recipes, clear instructions, and a passion for good food... that’s who we are!</Text>
         </View>
@@ -36,14 +37,14 @@ const styles = StyleSheet.create({
       marginTop: 40,
       maxWidth: 1960,
       marginHorizontal: 'auto',
-      paddingHorizontal: 12,
+      paddingHorizontal: 16,
     },
     text: {
-      textAlign: "center",
+      textAlign: "left",
       paddingBottom: 18,
-      fontSize: 18,
+      fontSize: 17,
       fontFamily: 'WorkSans-Light',
-      lineHeight: 25,
+      lineHeight: 28,
       color: '#4A4A4A',
     }
 })

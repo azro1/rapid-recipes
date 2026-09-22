@@ -16,7 +16,7 @@ const Welcome = ({ navigation }) => {
         />
         <Text style={styles.leadText}>Explore our diverse selection of recipes categorized by cuisine, dietary preferences, and meal types. Select a category and let the cooking adventure begin!</Text>
 
-        <Pressable style={globalStyles.button} onPress={() => navigation.navigate('Categories')} >
+        <Pressable style={[globalStyles.button, styles.button]} onPress={() => navigation.navigate('Categories')} >
             <Text style={globalStyles.buttonText}>Choose a Category</Text>
         </Pressable>
       </View>
@@ -35,11 +35,14 @@ const styles = StyleSheet.create({
       gap: 10,
       alignItems: 'center',
     },
+    button: {
+      marginTop: 16,
+    },
     leadText: {
       textAlign: "center",
       fontSize: 18,
       fontFamily: 'WorkSans-Light',
-      lineHeight: 26,
+      lineHeight: 28,
       paddingBottom: 8,
       color: '#4A4A4A',
     }

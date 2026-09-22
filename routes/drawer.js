@@ -3,6 +3,8 @@ const Drawer = createDrawerNavigator();
 
 // screens
 import AboutScreen from '../screens/about'
+import HelpScreen from '../screens/help'
+import FavouritesScreen from '../screens/favourites'
 
 // routes
 import MainStackScreen from './mainStack';
@@ -24,7 +26,9 @@ const RootDrawerNavigator = () => {
       headerShown: false
     }} >
       <Drawer.Screen name="Menu" component={MainStackScreen} />
+      <Drawer.Screen name="Favourites" component={FavouritesScreen} />
       <Drawer.Screen name="About Us" component={AboutScreen} />
+      <Drawer.Screen name="Help" component={HelpScreen} />
     </Drawer.Navigator>
   )
 }

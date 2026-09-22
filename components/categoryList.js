@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   previewTitle: {
     textAlign: 'center',
     fontSize: 16,
-    fontFamily: 'WorkSans-Regular',
+    fontFamily: 'WorkSans-Medium',
     marginTop: 4,
     color: '#4A4A4A',
   },

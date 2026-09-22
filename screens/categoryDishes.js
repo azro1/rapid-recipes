@@ -15,20 +15,19 @@ import DishList from '../components/dishList';
 const CategoryDishes = ({ route, navigation }) => {
   const [isLoading, setIsLoading] = useState(true)
   const { name } = route.params;
-  
-  const { recipeData, error } = useRecipe(name)  
-  
+  const { recipeData, error } = useRecipe(name)
+
   useEffect(() => {
     const triggerEdgeFunction = async () => {
       try {
-        const response = await fetch('https://mxhuwjcxhcluuofyhjys.supabase.co/functions/v1/upsert-meal-dishes', {
+        const response = await fetch('https://ypsvljptutcivzktmcad.supabase.co/functions/v1/upsert-meal-dishes', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
           },
-          body: JSON.stringify({ 
-            category: name 
+          body: JSON.stringify({
+            category: name
           })
         });
 

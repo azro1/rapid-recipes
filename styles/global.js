@@ -20,15 +20,14 @@ const globalStyles = StyleSheet.create({
     color: '#3A3A3A'
   },
   button: {
-    padding: 14,
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
     backgroundColor: "#D94F30",
-    borderRadius: 10
+    borderRadius: 8
   },
   buttonText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 17,
     fontFamily: 'WorkSans-Bold',
     letterSpacing: 0.2,
   },

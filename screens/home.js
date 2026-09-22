@@ -11,18 +11,19 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
         <View style={styles.introBlock}>
-            <Image 
-              source={require('../assets/images/salad.png')} 
-              style={{ width: 90, height: 90 }} 
-              resizeMode="contain" 
+            <Image
+              source={require('../assets/images/salad.png')}
+              style={styles.image}
+              resizeMode="contain"
             />
-            <Header 
+            <Header
               title="Rapid Recipes"
               fontSize={34}
-              paddingBottom={2}
+              lineHeight={38}
+              paddingBottom={0}
             />
-            <Text style={styles.subHeading}>Tasty Creations in Minutes!</Text>
-            <Pressable style={globalStyles.button} onPress={() => navigation.push('Welcome')}>
+            <Text style={styles.subHeading}>Tasty creations in minutes, without the fuss.</Text>
+            <Pressable style={[globalStyles.button, styles.button]} onPress={() => navigation.navigate('Welcome')}>
               <Text style={globalStyles.buttonText}>Explore Our Recipes</Text>
             </Pressable>
         </View>
@@ -33,21 +34,31 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center"
+    alignItems: 'center',
+    paddingHorizontal: 32,
   },
   introBlock: {
+    width: '100%',
+    alignItems: 'center',
     marginTop: 148,
-    alignItems: "center",
+  },
+  image: {
+    width: 90,
+    height: 90,
+    marginBottom: 16,
+  },
+  button: {
+    marginTop: 28,
   },
   subHeading: {
-    fontSize:  24,
-    fontFamily: 'KirangHaerang-Regular',
-    color: '#A27035',
-    paddingBottom: 14,
-    letterSpacing: 0.4
+    fontFamily: 'WorkSans-Regular',
+    fontSize: 17,
+    lineHeight: 24,
+    letterSpacing: 0.6,
+    marginTop: 10,
+    color: '#4A4A4A',
+    textAlign: 'center',
   },
 })
 
 export default Home
-
-

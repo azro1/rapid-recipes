@@ -65,7 +65,7 @@ const RecipeDetails = ({ recipeData }) => {
 
 const styles = StyleSheet.create({
   recipeWrapper: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 16,
     maxWidth: 1960,
     marginHorizontal: 'auto',
     width: '100%',

@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   leadText: {
-    paddingTop: 6,
+    paddingTop: 10,
     paddingBottom: 12,
     paddingHorizontal: 12,
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 17,
     fontFamily: 'WorkSans-Light',
     lineHeight: 25,
     color: '#4A4A4A',

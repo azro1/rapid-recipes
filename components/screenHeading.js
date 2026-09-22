@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable } from 'react-native'
+import { StyleSheet, Text, Pressable } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -15,6 +15,11 @@ const ScreenHeading = ({ showBackButton, navigation, screen }) => {
         </Pressable>
       )}
       <Text style={styles.heading}>{screen}</Text>
+      {showBackButton ? (
+        <Pressable onPress={() => navigation.openDrawer()}>
+          <Feather name="menu" size={24} color="#fff" />
+        </Pressable>
+      ) : null}
     </SafeAreaView>
   )
 }
@@ -30,9 +35,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#3A5743',
   },
   heading: {
+    flex: 1,
     fontSize: 18,
-    fontFamily: 'WorkSans-regular',
-    flexShrink: 1,
+    fontFamily: 'WorkSans-Regular',
     color: '#fff',
   }
 })

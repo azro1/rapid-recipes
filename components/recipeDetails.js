@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ScrollView, View, Text, Image, StyleSheet, Pressable, Linking, FlatList } from 'react-native'
-import { ArrowLeftRight } from 'lucide-react-native'
+import { ChevronLeft, ChevronRight } from 'lucide-react-native'
 
 const isStepMarker = (line) => /^(?:step\s*)?\d+\s*[:.)\-–—]*\s*$/i.test(line)
 
@@ -83,7 +83,8 @@ const InstructionCards = ({ instructions }) => {
         )}
         {steps.length > 1 ? (
           <View style={styles.stepHint} accessibilityLabel="Swipe">
-            <ArrowLeftRight size={22} color="#4A4A4A" />
+            <ChevronLeft size={18} color="#4A4A4A" />
+            <ChevronRight size={18} color="#4A4A4A" />
           </View>
         ) : null}
       </View>
@@ -213,7 +214,10 @@ const styles = StyleSheet.create({
     flexGrow: 0,
   },
   stepPage: {
-    paddingRight: 0,
+    backgroundColor: '#F3EEE4',
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
   },
   stepText: {
     fontSize: 17,
@@ -222,8 +226,11 @@ const styles = StyleSheet.create({
     color: '#4A4A4A',
   },
   stepHint: {
-    marginTop: 4,
+    marginTop: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
+    gap: 28,
   },
   linkContainer: {
     marginTop: 20,

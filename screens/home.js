@@ -15,6 +15,7 @@ const Home = ({ navigation }) => {
               source={require('../assets/images/salad.png')}
               style={styles.image}
               resizeMode="contain"
+              accessible={false}
             />
             <Header
               title="Rapid Recipes"
@@ -23,7 +24,12 @@ const Home = ({ navigation }) => {
               paddingBottom={0}
             />
             <Text style={styles.subHeading}>Tasty creations in minutes, without the fuss.</Text>
-            <Pressable style={[globalStyles.button, styles.button]} onPress={() => navigation.navigate('Welcome')}>
+            <Pressable
+              style={[globalStyles.button, styles.button]}
+              onPress={() => navigation.navigate('Welcome')}
+              accessibilityRole="button"
+              accessibilityLabel="Explore our recipes"
+            >
               <Text style={globalStyles.buttonText}>Explore Our Recipes</Text>
             </Pressable>
         </View>

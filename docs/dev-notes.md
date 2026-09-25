@@ -18,6 +18,14 @@ The side menu is Menu, Favourites, About Us, and Help. Help emails rapidrecipies
 - Body colour on cream is #4A4A4A. Forest is #3A5743. Buttons are #D94F30. Drawer active item is #A27035. Background is #FFFCF5.
 - Support text that was tuned: Welcome is 18 Light, line height 28. About Us is 17 Light, line height 28. Category support is 17 Light, line height 25. Dish names are 16 Medium.
 
+## Accessibility
+
+Buttons, links, search, and recipe cards have labels for screen readers. Decorative pictures are hidden from the reader so the name is announced once. Icon buttons have a larger tap area.
+
+## Sustainability
+
+Recipes are loaded for the open category only, not the whole database. Saved recipes stay on the device. Do not add tracking, ads, or a sustainability badge. The food-waste feature is Rescue & Reuse, in upcoming features.
+
 ## Store
 
 - Android package is com.rapidrecipes.app. It can still change until the first upload.

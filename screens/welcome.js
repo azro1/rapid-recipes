@@ -16,7 +16,12 @@ const Welcome = ({ navigation }) => {
         />
         <Text style={styles.leadText}>Explore our diverse selection of recipes categorized by cuisine, dietary preferences, and meal types. Select a category and let the cooking adventure begin!</Text>
 
-        <Pressable style={[globalStyles.button, styles.button]} onPress={() => navigation.navigate('Categories')} >
+        <Pressable
+          style={[globalStyles.button, styles.button]}
+          onPress={() => navigation.navigate('Categories')}
+          accessibilityRole="button"
+          accessibilityLabel="Choose a category"
+        >
             <Text style={globalStyles.buttonText}>Choose a Category</Text>
         </Pressable>
       </View>

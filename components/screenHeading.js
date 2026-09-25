@@ -6,17 +6,32 @@ const ScreenHeading = ({ showBackButton, navigation, screen }) => {
   return (
     <SafeAreaView style={styles.headingContainer}>
       {showBackButton ? (
-        <Pressable onPress={() => navigation.goBack()}>
+        <Pressable
+          onPress={() => navigation.goBack()}
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+          hitSlop={12}
+        >
           <Feather name="arrow-left" size={24} color="#fff" />
         </Pressable>
       ) : (
-        <Pressable onPress={() => navigation.openDrawer()}>
+        <Pressable
+          onPress={() => navigation.openDrawer()}
+          accessibilityRole="button"
+          accessibilityLabel="Open menu"
+          hitSlop={12}
+        >
           <Feather name="menu" size={24} color="#fff" />
         </Pressable>
       )}
       <Text style={styles.heading}>{screen}</Text>
       {showBackButton ? (
-        <Pressable onPress={() => navigation.openDrawer()}>
+        <Pressable
+          onPress={() => navigation.openDrawer()}
+          accessibilityRole="button"
+          accessibilityLabel="Open menu"
+          hitSlop={12}
+        >
           <Feather name="menu" size={24} color="#fff" />
         </Pressable>
       ) : null}

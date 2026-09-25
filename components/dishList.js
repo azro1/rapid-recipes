@@ -37,6 +37,7 @@ const DishList = ({ name, dishes, getDish }) => {
         value={query}
         onChangeText={setQuery}
         placeholder="Search dishes"
+        accessibilityLabel="Search dishes"
         placeholderTextColor="#8A8478"
         style={styles.search}
         autoCorrect={false}
@@ -55,9 +56,14 @@ const DishList = ({ name, dishes, getDish }) => {
           showsVerticalScrollIndicator={false}
           columnWrapperStyle={responsiveColumns > 1 ? { justifyContent: 'flex-start', gap } : undefined}
           renderItem={({ item }) => (
-            <Pressable style={[styles.dishList, { width: itemWidth }]} onPress={() => getDish(item.dish, item.dish_id)}>
+            <Pressable
+              style={[styles.dishList, { width: itemWidth }]}
+              onPress={() => getDish(item.dish, item.dish_id)}
+              accessibilityRole="button"
+              accessibilityLabel={item.dish}
+            >
               <Card>
-                <Image style={styles.thumbnail} source={{ uri: item.image_url }} resizeMode="cover" />
+                <Image style={styles.thumbnail} source={{ uri: item.image_url }} resizeMode="cover" accessible={false} />
                 <Text style={styles.dishName} numberOfLines={1} ellipsizeMode="tail">
                   {item.dish}
                 </Text>

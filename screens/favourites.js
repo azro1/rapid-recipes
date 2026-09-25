@@ -39,7 +39,11 @@ const Favourites = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.list}
             renderItem={({ item }) => (
-              <Pressable onPress={() => openRecipe(item)}>
+              <Pressable
+                onPress={() => openRecipe(item)}
+                accessibilityRole="button"
+                accessibilityLabel={item.dish}
+              >
                 <Card>
                   <View style={styles.row}>
                     {item.image_url ? (

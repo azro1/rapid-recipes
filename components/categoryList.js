@@ -19,9 +19,14 @@ const CategoryList = ({ recipeData, getCatTitle }) => {
       columnWrapperStyle={responsiveColumns > 1 ? { justifyContent: 'flex-start', gap: GAP } : undefined}
       style={{ flex: 1 }} 
       renderItem={({ item }) => (
-        <Pressable style={[styles.previewItem, { width: CARD_WIDTH }]} onPress={() => getCatTitle(item.title)}>
+        <Pressable
+          style={[styles.previewItem, { width: CARD_WIDTH }]}
+          onPress={() => getCatTitle(item.title)}
+          accessibilityRole="button"
+          accessibilityLabel={item.title}
+        >
           <Card>
-            <Image style={styles.previewImage} source={{ uri: item.image_url }} resizeMode="contain" />
+            <Image style={styles.previewImage} source={{ uri: item.image_url }} resizeMode="contain" accessible={false} />
           </Card>
           <Text style={styles.previewTitle}>{item.title}</Text>
         </Pressable>

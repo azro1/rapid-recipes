@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
-import { useEffect } from 'react';
-import { LogBox } from 'react-native';
+import './suppressGotrueWarning'
+import { useEffect, useState } from 'react';
+import { LogBox, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -22,15 +23,20 @@ const App = () => {
     'WorkSans-Medium': require('./assets/fonts/WorkSans-Medium.ttf'),
     'WorkSans-Regular': require('./assets/fonts/WorkSans-Regular.ttf'),
     'WorkSans-Light': require('./assets/fonts/WorkSans-Light.ttf'),
-    'KirangHaerang-Regular': require('./assets/fonts/KirangHaerang-Regular.ttf'),
   })
-  const ready = fontsLoaded || fontError
+  const [gaveUp, setGaveUp] = useState(false)
+  const ready = fontsLoaded || fontError || gaveUp
+
+  useEffect(() => {
+    const timer = setTimeout(() => setGaveUp(true), 4000)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     if (ready) SplashScreen.hideAsync()
   }, [ready])
 
-  if (!ready) return null
+  if (!ready) return <View style={{ flex: 1, backgroundColor: '#FFFCF5' }} />
 
   return (
     <FavouritesProvider>

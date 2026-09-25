@@ -77,7 +77,13 @@ const Recipe = ({ route }) => {
         fontSize={28}
         title={dish} 
       />
-      <Pressable style={styles.saveButton} onPress={onSave}>
+      <Pressable
+        style={styles.saveButton}
+        onPress={onSave}
+        accessibilityRole="button"
+        accessibilityLabel={saved ? 'Remove from favourites' : 'Save recipe'}
+        accessibilityState={{ selected: saved }}
+      >
         <Ionicons name={saved ? 'heart' : 'heart-outline'} size={20} color="#D94F30" />
         <Text style={styles.saveLabel}>{saved ? 'Saved' : 'Save'}</Text>
       </Pressable>

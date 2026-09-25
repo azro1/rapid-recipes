@@ -2,7 +2,11 @@
 
 Add the next feature here before building it. Move it to the changelog when it is done.
 
-Nothing is queued. Search, favourites, and the menu button on inner screens shipped on 22 September 2026.
+Surprise Me is next. The name is temporary. The store listing already says it.
+
+Then Rescue & Reuse. People pick food they already have, and the app shows recipes that use it. Leftovers are the same idea: turn what is left into another meal. No sustainability badge and no generic tips.
+
+Recipe ingredients are stored as text, so the match has to be on those words. A recipe that uses more of the selected ingredients comes first.
 
 
 

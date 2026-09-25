@@ -1,8 +1,95 @@
-import { ScrollView, View, Text, Image, StyleSheet, Dimensions, Pressable, Linking } from 'react-native'
+import { useState } from 'react'
+import { ScrollView, View, Text, Image, StyleSheet, Pressable, Linking, FlatList } from 'react-native'
+import { ArrowLeftRight } from 'lucide-react-native'
 
-// get width and height of device window from Dimensions component to allow elements occupy full width and height of device in their containers 
-// const width = Dimensions.get('window').width; 
-// const height = Dimensions.get('window').height;
+const isStepMarker = (line) => /^(?:step\s*)?\d+\s*[:.)\-–—]*\s*$/i.test(line)
+
+const UNIT = /^(tbs|tbsp|tsp|cup|cups|oz|lb|lbs|g|kg|ml|clove|cloves|medium|small|large|inch|inches|can|cans|tin|packet|packets|tablespoon|tablespoons|teaspoon|teaspoons|ounce|ounces|pound|pounds|salted)$/i
+
+const stripStepPrefix = (step) => {
+  const withoutLabel = step.replace(/^(?:step\s+\d+\s*[:.)\-–—]*|\d+\s*[:.)])\s*/i, '').trim()
+  const inline = withoutLabel.match(/^(\d{1,2})\s+([A-Z].*)$/)
+  if (!inline) return withoutLabel
+  const firstWord = inline[2].split(/\s+/)[0].replace(/[^A-Za-z]/g, '')
+  if (UNIT.test(firstWord)) return withoutLabel
+  return inline[2].trim()
+}
+
+const finishStep = (step) => step
+  .replace(/:(?=\s|$)/g, '.')
+  .replace(/[ \t]+\./g, '.')
+  .replace(/\.{2,}/g, '.')
+  .trim()
+
+const getSteps = (instructions) => {
+  if (!instructions || !String(instructions).trim()) return []
+  const lines = String(instructions).replace(/\r\n/g, '\n').split('\n').map((line) => line.trim())
+  const hasMarkers = lines.some((line) => isStepMarker(line))
+
+  if (hasMarkers) {
+    const steps = []
+    let current = []
+    const flush = () => {
+      const body = stripStepPrefix(current.join('\n').replace(/\n{3,}/g, '\n\n').trim())
+      current = []
+      if (body && !isStepMarker(body)) steps.push(body)
+    }
+    lines.forEach((line) => {
+      if (isStepMarker(line)) flush()
+      else if (line) current.push(line)
+    })
+    flush()
+    if (steps.length) return steps.map(finishStep).filter(Boolean)
+  }
+
+  const paragraphs = lines.map((line) => stripStepPrefix(line)).filter((line) => line && !isStepMarker(line))
+  if (paragraphs.length > 1) return paragraphs.map(finishStep).filter(Boolean)
+  if (paragraphs.length === 1) {
+    const sentences = paragraphs[0].split(/(?<=[.!?])\s+(?=[A-Z])/).map((part) => part.trim()).filter(Boolean)
+    if (sentences.length > 1) return sentences.map(finishStep).filter(Boolean)
+  }
+  return paragraphs.map(finishStep).filter(Boolean)
+}
+
+const InstructionCards = ({ instructions }) => {
+  const steps = getSteps(instructions)
+  const [pageWidth, setPageWidth] = useState(0)
+
+  if (!steps.length) return null
+
+  return (
+    <View style={styles.instructionsContainer}>
+      <Text style={styles.header}>Instructions</Text>
+      <View style={styles.stepBlock} onLayout={(event) => setPageWidth(event.nativeEvent.layout.width)}>
+        {pageWidth > 0 && (
+          <FlatList
+            data={steps}
+            horizontal
+            pagingEnabled
+            nestedScrollEnabled
+            showsHorizontalScrollIndicator={false}
+            style={styles.stepList}
+            keyExtractor={(_, index) => String(index)}
+            renderItem={({ item, index }) => (
+              <View
+                style={[styles.stepPage, { width: pageWidth }]}
+                accessible
+                accessibilityLabel={`Step ${index + 1} of ${steps.length}. ${item}`}
+              >
+                <Text style={styles.stepText}>{`${index + 1}. ${item}`}</Text>
+              </View>
+            )}
+          />
+        )}
+        {steps.length > 1 ? (
+          <View style={styles.stepHint} accessibilityLabel="Swipe">
+            <ArrowLeftRight size={22} color="#4A4A4A" />
+          </View>
+        ) : null}
+      </View>
+    </View>
+  )
+}
 
 const RecipeDetails = ({ recipeData }) => {
   const getIngredients = (item) => item.ingredients || [];
@@ -28,19 +115,16 @@ const RecipeDetails = ({ recipeData }) => {
                 <Text key={idx} style={styles.sectionItem}>{`\u2022 ${ingredient}`}</Text>
               ))}
             </View>
-            <View style={styles.instructionsContainer}>
-              <Text style={styles.header}>Instructions:</Text>
-              <View style={styles.instructions}>
-                {item.instructions.split('\n').filter(p => p.trim() !== '').map((para, i) => (
-                  <Text key={i} style={styles.instructionsText}>{para}</Text>
-                ))}
-              </View>
-            </View>
+            <InstructionCards instructions={item.instructions} />
             {item.source_url && (
               <View style={styles.linkContainer}>
                 <Text style={styles.header}>Source:</Text>
                 <View style={styles.linkWrapper}>
-                  <Pressable onPress={() => Linking.openURL(item.source_url)}>
+                  <Pressable
+                    onPress={() => Linking.openURL(item.source_url)}
+                    accessibilityRole="link"
+                    accessibilityLabel="Open source article"
+                  >
                     <Text style={styles.link}>{item.source_url}</Text>
                   </Pressable>
                 </View>
@@ -50,7 +134,11 @@ const RecipeDetails = ({ recipeData }) => {
               <View style={styles.linkContainer}>
                 <Text style={styles.header}>Video:</Text>
                 <View style={styles.linkWrapper}>
-                  <Pressable onPress={() => Linking.openURL(item.youtube_url)}>
+                  <Pressable
+                    onPress={() => Linking.openURL(item.youtube_url)}
+                    accessibilityRole="link"
+                    accessibilityLabel="Open recipe video"
+                  >
                     <Text style={styles.link}>{item.youtube_url}</Text>
                   </Pressable>
                 </View>
@@ -116,19 +204,26 @@ const styles = StyleSheet.create({
   },
   instructionsContainer: {
     marginTop: 30,
-    gap: 6
+    gap: 10,
   },
-  instructions: {
+  stepBlock: {
+    width: '100%',
   },
-  instructionsText: {
-    fontSize: 16,
+  stepList: {
+    flexGrow: 0,
+  },
+  stepPage: {
+    paddingRight: 0,
+  },
+  stepText: {
+    fontSize: 17,
     fontFamily: 'WorkSans-Light',
-    lineHeight: 24,
-    flexWrap: 'wrap',
-    flexShrink: 1,
-    overflowWrap: 'break-word',
-    wordBreak: 'break-word',
+    lineHeight: 26,
     color: '#4A4A4A',
+  },
+  stepHint: {
+    marginTop: 4,
+    alignItems: 'center',
   },
   linkContainer: {
     marginTop: 20,

@@ -24,7 +24,11 @@ const Help = ({ navigation }) => {
         <Text style={styles.text}>
           You can reach us at the address below.
         </Text>
-        <Pressable onPress={() => Linking.openURL(`mailto:${SUPPORT_EMAIL}`)}>
+        <Pressable
+          onPress={() => Linking.openURL(`mailto:${SUPPORT_EMAIL}`)}
+          accessibilityRole="link"
+          accessibilityLabel={`Email ${SUPPORT_EMAIL}`}
+        >
           <Text style={styles.email}>{SUPPORT_EMAIL}</Text>
         </Pressable>
       </View>

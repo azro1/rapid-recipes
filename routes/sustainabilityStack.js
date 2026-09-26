@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ScreenHeading from '../components/screenHeading';
+import Recipe from '../screens/recipe';
 import {
   SustainabilityHome,
   SustainabilityAbout,
@@ -55,6 +56,7 @@ const SustainabilityStack = ({ navigation }) => {
         <Stack.Screen name="About" component={SustainabilityAbout} />
         <Stack.Screen name="Pick" component={FoodPick} />
         <Stack.Screen name="Results" component={FoodResults} />
+        <Stack.Screen name="Recipe" component={Recipe} initialParams={{ heading: 'Recipe' }} />
       </Stack.Navigator>
     </View>
   );

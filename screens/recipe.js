@@ -17,12 +17,13 @@ import RecipeDetails from '../components/recipeDetails';
 import { useFavourites } from '../context/FavouritesContext';
 
 const Recipe = ({ route }) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [edgeError, setEdgeError] = useState(null)
   const { dish, id } = route.params;
   const { isFavourite, toggleFavourite } = useFavourites();
   const saved = isFavourite(id);
 
   const { recipeData, error } = useRecipeDetails(id)
+  const hasRecipe = Array.isArray(recipeData) && recipeData.length > 0
 
   const onSave = () => {
     const item = recipeData?.[0];
@@ -53,15 +54,14 @@ const Recipe = ({ route }) => {
           throw new Error('Edge function request failed');
         }
       } catch (error) {
+        setEdgeError(error.message)
         console.log(error.message)
-      } finally {
-        setIsLoading(false);
       }
     }
     triggerEdgeFuction();
   }, [id])
 
-  if (isLoading) {
+  if (!hasRecipe && !edgeError && !error) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size={50} color="#3A5743" />
@@ -87,7 +87,7 @@ const Recipe = ({ route }) => {
         <Ionicons name={saved ? 'heart' : 'heart-outline'} size={20} color="#D94F30" />
         <Text style={styles.saveLabel}>{saved ? 'Saved' : 'Save'}</Text>
       </Pressable>
-      {error && <Text style={globalStyles.error}>{error}</Text>}
+      {(error || edgeError) && <Text style={globalStyles.error}>{error || edgeError}</Text>}
       {recipeData && <RecipeDetails recipeData={recipeData} />}
     </View>
   );

@@ -76,12 +76,12 @@ const LEFTOVER = [
 
 const COPY = {
   have: {
-    title: 'Use What You Have',
+    title: 'Use Ingredients',
     lead: 'Select the ingredients you have to find recipes that use them.',
     items: HAVE,
   },
   leftover: {
-    title: 'Leftover Meals',
+    title: 'Use Leftovers',
     lead: 'Select food you\'ve already cooked and have left over.',
     items: LEFTOVER,
   },
@@ -162,20 +162,20 @@ export const SustainabilityHome = ({ navigation }) => {
       </Pressable>
       <Pressable
         style={styles.choice}
-        onPress={() => navigation.navigate('Pick', { mode: 'have', heading: 'Use What You Have' })}
+        onPress={() => navigation.navigate('Pick', { mode: 'have', heading: 'Use Ingredients' })}
         accessibilityRole="button"
-        accessibilityLabel="Use What You Have"
+        accessibilityLabel="Use Ingredients"
       >
-        <Text style={styles.choiceTitle}>Use What You Have</Text>
+        <Text style={styles.choiceTitle}>Use Ingredients</Text>
         <Text style={styles.choiceText}>Find recipes using ingredients you haven't used yet.</Text>
       </Pressable>
       <Pressable
         style={styles.choice}
-        onPress={() => navigation.navigate('Pick', { mode: 'leftover', heading: 'Leftover Meals' })}
+        onPress={() => navigation.navigate('Pick', { mode: 'leftover', heading: 'Use Leftovers' })}
         accessibilityRole="button"
-        accessibilityLabel="Leftover Meals"
+        accessibilityLabel="Use Leftovers"
       >
-        <Text style={styles.choiceTitle}>Leftover Meals</Text>
+        <Text style={styles.choiceTitle}>Use Leftovers</Text>
         <Text style={styles.choiceText}>Find recipes using food you've already cooked and have left over.</Text>
       </Pressable>
     </View>
@@ -318,9 +318,8 @@ export const FoodPick = ({ navigation, route }) => {
               accessibilityRole="button"
               accessibilityLabel="Find recipes"
             >
-              {loading
-                ? <ActivityIndicator color="#FFFFFF" />
-                : <Text style={globalStyles.buttonText}>Find recipes</Text>}
+              <Text style={[globalStyles.buttonText, loading && styles.buttonTextHidden]}>Find recipes</Text>
+              {loading ? <ActivityIndicator style={styles.buttonSpinner} color="#FFFFFF" /> : null}
             </Pressable>
     </View>
   )
@@ -330,15 +329,16 @@ export const FoodResults = ({ navigation, route }) => {
   const { heading, results = [], total = 0 } = route.params || {}
 
   const openRecipe = (item) => {
-    navigation.navigate('Menu', {
-      screen: 'Recipe',
-      params: { dish: item.dish, id: item.id },
+    navigation.navigate('Recipe', {
+      heading: 'Recipe',
+      dish: item.dish,
+      id: item.id,
     })
   }
 
   return (
     <View style={styles.content}>
-      <Header fontSize={30} title={heading} align="left" />
+      <Header fontSize={30} title={heading} align="left" paddingBottom={12} />
       {results.length === 0 ? (
         <Text style={styles.lead}>No matching recipes found. Try selecting different foods.</Text>
       ) : (
@@ -470,6 +470,14 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 24,
     alignSelf: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonTextHidden: {
+    opacity: 0,
+  },
+  buttonSpinner: {
+    position: 'absolute',
   },
   buttonOff: {
     opacity: 0.45,

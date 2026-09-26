@@ -14,27 +14,16 @@ const ScreenHeading = ({ showBackButton, navigation, screen }) => {
         >
           <Feather name="arrow-left" size={24} color="#fff" />
         </Pressable>
-      ) : (
-        <Pressable
-          onPress={() => navigation.openDrawer()}
-          accessibilityRole="button"
-          accessibilityLabel="Open menu"
-          hitSlop={12}
-        >
-          <Feather name="menu" size={24} color="#fff" />
-        </Pressable>
-      )}
-      <Text style={styles.heading}>{screen}</Text>
-      {showBackButton ? (
-        <Pressable
-          onPress={() => navigation.openDrawer()}
-          accessibilityRole="button"
-          accessibilityLabel="Open menu"
-          hitSlop={12}
-        >
-          <Feather name="menu" size={24} color="#fff" />
-        </Pressable>
       ) : null}
+      <Text style={styles.heading}>{screen}</Text>
+      <Pressable
+        onPress={() => navigation.openDrawer()}
+        accessibilityRole="button"
+        accessibilityLabel="Open menu"
+        hitSlop={12}
+      >
+        <Feather name="menu" size={24} color="#fff" />
+      </Pressable>
     </SafeAreaView>
   )
 }

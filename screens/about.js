@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
       marginTop: 40,
       maxWidth: 1960,
       marginHorizontal: 'auto',
-      paddingHorizontal: 16,
+      paddingHorizontal: 20,
     },
     text: {
       textAlign: "left",

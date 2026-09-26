@@ -5,6 +5,7 @@ const Drawer = createDrawerNavigator();
 import AboutScreen from '../screens/about'
 import HelpScreen from '../screens/help'
 import FavouritesScreen from '../screens/favourites'
+import SustainabilityScreen from '../routes/sustainabilityStack'
 
 // routes
 import MainStackScreen from './mainStack';
@@ -23,10 +24,13 @@ const RootDrawerNavigator = () => {
         fontSize: 18,
         fontFamily: 'WorkSans-Medium'
       },
-      headerShown: false
+      headerShown: false,
+      drawerPosition: 'right',
+      swipeEnabled: false
     }} >
       <Drawer.Screen name="Menu" component={MainStackScreen} />
       <Drawer.Screen name="Favourites" component={FavouritesScreen} />
+      <Drawer.Screen name="Sustainability" component={SustainabilityScreen} />
       <Drawer.Screen name="About Us" component={AboutScreen} />
       <Drawer.Screen name="Help" component={HelpScreen} />
     </Drawer.Navigator>

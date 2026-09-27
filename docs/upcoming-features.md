@@ -2,10 +2,6 @@
 
 Add the next feature here before building it. Move it to the changelog when it is done.
 
-Surprise Me is next. The name is temporary. The store listing already says it.
-
-
-
 4. “What should I cook?”
 This could be genuinely useful if done properly.
 Something like:

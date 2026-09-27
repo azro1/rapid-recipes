@@ -1,5 +1,10 @@
 # Changelog
 
+## 27 September 2026
+
+- Welcome offers Choose a Category and Pick for Me. Pick for Me opens a recipe. Try again chooses another.
+- A favourite can be removed from the side menu by swiping left.
+
 ## 26 September 2026
 
 - Sustainability is in the side menu. It finds recipes for food you already have.

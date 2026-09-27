@@ -5,8 +5,9 @@ Rapid Recipes is a recipe app. People browse by category, save favourites on the
 ## Features
 
 - Browse recipes by category, then open a dish.
+- Pick for Me, on the welcome screen, chooses a recipe.
 - Search the dishes in the open category.
-- Save a recipe to Favourites. Favourites stay on the device.
+- Save a recipe to Favourites. Favourites stay on the device. Swipe left on a saved recipe to remove it.
 - Sustainability, in the side menu:
   - Use Ingredients finds recipes from ingredients that have not been used yet.
   - Use Leftovers finds recipes from food that has already been cooked.

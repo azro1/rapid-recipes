@@ -2,7 +2,7 @@
 
 ## What the app does
 
-Rapid Recipes lets someone browse recipes by category: Home, Welcome, category, dishes, recipe. There are no accounts.
+Rapid Recipes lets someone browse recipes by category: Home, Welcome, category, dishes, recipe. Welcome also offers Pick for Me, which opens a random recipe. There are no accounts.
 
 The side menu is Menu, Favourites, Sustainability, About Us, and Help. The menu sits on the right and the drawer opens from the right. Help emails rapidrecipies.support@gmail.com. The spelling is recipies.
 
@@ -13,10 +13,11 @@ The side menu is Menu, Favourites, Sustainability, About Us, and Help. The menu 
 - The bar is a SafeAreaView, height 70. Do not replace it with a manual status-bar inset.
 - Dishes and recipe wait until their Supabase edge function finishes before the screen is shown.
 - Search only filters the dishes in the open category.
-- Favourites are stored on the device with AsyncStorage. They are not in the database.
+- Favourites are stored on the device with AsyncStorage. They are not in the database. Swipe left on a favourite to remove it. That uses the same action as the heart on the recipe.
+- Pick for Me asks TheMealDB for a random meal, then opens the recipe screen. Try again chooses another. It does not use categories. The name in the app is Pick for Me. The store listing still says Surprise Me.
 - Category dish lists and recipe content use 16px side padding. About Us and Help match that.
 - Body colour on cream is #4A4A4A. Forest is #3A5743. Buttons are #D94F30. Drawer active item is #A27035. Background is #FFFCF5.
-- Support text that was tuned: Welcome is 18 Light, line height 28. About Us is 17 Light, line height 28. Category support is 17 Light, line height 25. Dish names are 16 Medium.
+- Support text that was tuned: About Us is 17 Light, line height 28. Category support is 17 Light, line height 25. Dish names are 16 Medium. Welcome choices use 18 Medium for the name and 16 Light for the line under it.
 
 ## Accessibility
 

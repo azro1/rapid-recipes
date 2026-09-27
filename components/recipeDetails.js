@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ScrollView, View, Text, Image, StyleSheet, Pressable, Linking, FlatList } from 'react-native'
 import { ChevronsLeftRight } from 'lucide-react-native'
+import { supabase } from '../db/config'
 
 const isStepMarker = (line) => /^(?:step\s*)?\d+\s*[:.)\-–—]*\s*$/i.test(line)
 
@@ -51,11 +52,33 @@ const getSteps = (instructions) => {
   return paragraphs.map(finishStep).filter(Boolean)
 }
 
-const InstructionCards = ({ instructions }) => {
-  const steps = getSteps(instructions)
+const InstructionCards = ({ recipeId, instructions }) => {
+  const [savedSteps, setSavedSteps] = useState(null)
   const [pageWidth, setPageWidth] = useState(0)
 
-  if (!steps.length) return null
+  useEffect(() => {
+    let live = true
+    setSavedSteps(null)
+    if (!recipeId) {
+      setSavedSteps([])
+      return undefined
+    }
+    supabase
+      .from('recipe_steps')
+      .select('position, text')
+      .eq('recipe_id', String(recipeId))
+      .eq('status', 'pending')
+      .order('position')
+      .then(({ data, error }) => {
+        if (!live) return
+        if (error || !data?.length) setSavedSteps([])
+        else setSavedSteps(data.map((row) => row.text).filter((text) => text && text.trim()))
+      })
+    return () => { live = false }
+  }, [recipeId])
+
+  const steps = savedSteps?.length ? savedSteps : getSteps(instructions)
+  if (savedSteps === null || !steps.length) return null
 
   return (
     <View style={styles.instructionsContainer}>
@@ -115,7 +138,7 @@ const RecipeDetails = ({ recipeData }) => {
                 <Text key={idx} style={styles.sectionItem}>{`\u2022 ${ingredient}`}</Text>
               ))}
             </View>
-            <InstructionCards instructions={item.instructions} />
+            <InstructionCards recipeId={item.recipe_id} instructions={item.instructions} />
             {item.source_url && (
               <View style={styles.linkContainer}>
                 <Text style={styles.header}>Source:</Text>

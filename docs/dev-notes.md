@@ -4,7 +4,7 @@
 
 Rapid Recipes lets someone browse recipes by category: Home, Welcome, category, dishes, recipe. There are no accounts.
 
-The side menu is Menu, Favourites, About Us, and Help. Help emails rapidrecipies.support@gmail.com. The spelling is recipies.
+The side menu is Menu, Favourites, Sustainability, About Us, and Help. The menu sits on the right and the drawer opens from the right. Help emails rapidrecipies.support@gmail.com. The spelling is recipies.
 
 ## How to build on it
 
@@ -24,7 +24,13 @@ Buttons, links, search, and recipe cards have labels for screen readers. Decorat
 
 ## Sustainability
 
-Recipes are loaded for the open category only, not the whole database. Saved recipes stay on the device. Do not add tracking, ads, or a sustainability badge. The food-waste feature is Rescue & Reuse, in upcoming features.
+Sustainability is its own stack: home, why this matters, pick, results, recipe. Swipe back and the system back button move one screen. A recipe opened from results stays on this stack. The drawer does not take the edge swipe.
+
+Use Ingredients is for food that has not been used yet. Use Leftovers is for food that has already been cooked. Both start from a fixed list, and someone can add their own item. A long press deletes a custom item. The fixed items stay.
+
+Matches come from TheMealDB by ingredient, not from the recipes table. Ingredients are only stored after a recipe has been opened. Recipes that use more of the selected items come first. Use Leftovers keeps a meal only when the method already treats that food as cooked.
+
+Do not add a sustainability badge, generic tips, tracking, or ads. Category recipes are still loaded only when that category is open. Favourites stay on the device.
 
 ## Store
 

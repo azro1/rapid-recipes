@@ -1,5 +1,13 @@
 # Changelog
 
+## 26 September 2026
+
+- Sustainability is in the side menu. It finds recipes for food you already have.
+- Use Ingredients is for ingredients that have not been used yet.
+- Use Leftovers is for food that has already been cooked. Recipes that cook that food from raw are left out.
+- Recipes that use more of the selected items come first. You can add your own items. A long press removes one you added.
+- A recipe opened from those results stays on that path. A spinner shows until the details are ready.
+
 ## 22 September 2026
 
 - Search on a category's dish list filters dishes by name.

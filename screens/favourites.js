@@ -1,11 +1,12 @@
 import { StyleSheet, View, Text, Pressable, Image, FlatList } from 'react-native';
+import { Swipeable } from 'react-native-gesture-handler';
 import ScreenHeading from '../components/screenHeading';
 import Header from '../components/header';
 import Card from '../components/card';
 import { useFavourites } from '../context/FavouritesContext';
 
 const Favourites = ({ navigation }) => {
-  const { favourites } = useFavourites();
+  const { favourites, toggleFavourite } = useFavourites();
 
   const openRecipe = (item) => {
     navigation.navigate('Menu', {
@@ -39,25 +40,36 @@ const Favourites = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.list}
             renderItem={({ item }) => (
-              <Pressable
-                onPress={() => openRecipe(item)}
-                accessibilityRole="button"
-                accessibilityLabel={item.dish}
-              >
-                <Card>
-                  <View style={styles.row}>
-                    {item.image_url ? (
-                      <Image source={{ uri: item.image_url }} style={styles.image} />
-                    ) : (
-                      <View style={styles.image} />
-                    )}
-                    <View style={styles.meta}>
-                      <Text style={styles.name} numberOfLines={2}>{item.dish}</Text>
-                      {item.category ? <Text style={styles.category}>{item.category}</Text> : null}
-                    </View>
+              <Swipeable
+                overshootRight={false}
+                renderRightActions={() => (
+                  <View style={styles.remove}>
+                    <Text style={styles.removeText}>Remove</Text>
                   </View>
-                </Card>
-              </Pressable>
+                )}
+                onSwipeableOpen={() => toggleFavourite(item)}
+              >
+                <Pressable
+                  onPress={() => openRecipe(item)}
+                  accessibilityRole="button"
+                  accessibilityLabel={item.dish}
+                  accessibilityHint="Swipe left to remove"
+                >
+                  <Card>
+                    <View style={styles.row}>
+                      {item.image_url ? (
+                        <Image source={{ uri: item.image_url }} style={styles.image} accessible={false} />
+                      ) : (
+                        <View style={styles.image} />
+                      )}
+                      <View style={styles.meta}>
+                        <Text style={styles.name} numberOfLines={2}>{item.dish}</Text>
+                        {item.category ? <Text style={styles.category}>{item.category}</Text> : null}
+                      </View>
+                    </View>
+                  </Card>
+                </Pressable>
+              </Swipeable>
             )}
           />
         )}
@@ -110,6 +122,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'WorkSans-Light',
     color: '#4A4A4A',
+  },
+  remove: {
+    width: 96,
+    marginBottom: 10,
+    borderRadius: 6,
+    backgroundColor: '#D94F30',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  removeText: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontFamily: 'WorkSans-Bold',
   },
 });
 

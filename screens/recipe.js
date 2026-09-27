@@ -15,15 +15,33 @@ import globalStyles from '../styles/global';
 import Header from '../components/header';
 import RecipeDetails from '../components/recipeDetails';
 import { useFavourites } from '../context/FavouritesContext';
+import fetchRandomMeal from '../utils/randomMeal';
 
-const Recipe = ({ route }) => {
+const Recipe = ({ route, navigation }) => {
   const [edgeError, setEdgeError] = useState(null)
-  const { dish, id } = route.params;
+  const [picking, setPicking] = useState(false)
+  const [pickError, setPickError] = useState(null)
+  const { dish, id, picked } = route.params || {};
   const { isFavourite, toggleFavourite } = useFavourites();
   const saved = isFavourite(id);
 
-  const { recipeData, error } = useRecipeDetails(id)
-  const hasRecipe = Array.isArray(recipeData) && recipeData.length > 0
+  const { recipeData, error, refetch } = useRecipeDetails(id)
+  const shownId = recipeData?.[0]?.recipe_id
+  const hasRecipe = shownId != null && String(shownId) === String(id)
+
+  const pickAgain = async () => {
+    if (picking) return
+    setPicking(true)
+    setPickError(null)
+    try {
+      const meal = await fetchRandomMeal(id)
+      navigation.setParams({ dish: meal.dish, id: meal.id, picked: true })
+    } catch (err) {
+      setPickError(err.message)
+    } finally {
+      setPicking(false)
+    }
+  }
 
   const onSave = () => {
     const item = recipeData?.[0];
@@ -36,7 +54,35 @@ const Recipe = ({ route }) => {
   };  
   
   useEffect(() => {
+    if (!route.params?.pickNow) return
+    let cancelled = false
+
+    const choose = async () => {
+      setPickError(null)
+      try {
+        const meal = await fetchRandomMeal()
+        if (cancelled) return
+        navigation.setParams({
+          dish: meal.dish,
+          id: meal.id,
+          picked: true,
+          pickNow: false,
+        })
+      } catch (err) {
+        if (!cancelled) setPickError(err.message)
+      }
+    }
+
+    choose()
+    return () => { cancelled = true }
+  }, [route.params?.pickNow])
+
+  useEffect(() => {
+    if (!id) return
+    let active = true
+
     const triggerEdgeFuction = async () => {
+      setEdgeError(null)
       try {
         const response = await fetch('https://ypsvljptutcivzktmcad.supabase.co/functions/v1/upsert-recipe-details', {
           method: 'POST',
@@ -53,17 +99,20 @@ const Recipe = ({ route }) => {
         if (!edgeResponse.success) {
           throw new Error('Edge function request failed');
         }
+        if (active) refetch()
       } catch (error) {
+        if (!active) return
         setEdgeError(error.message)
         console.log(error.message)
       }
     }
     triggerEdgeFuction();
+    return () => { active = false }
   }, [id])
 
-  if (!hasRecipe && !edgeError && !error) {
+  if (!pickError && (picking || (!hasRecipe && !edgeError && !error))) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={styles.loading}>
         <ActivityIndicator size={50} color="#3A5743" />
       </View>
     )
@@ -87,7 +136,20 @@ const Recipe = ({ route }) => {
         <Ionicons name={saved ? 'heart' : 'heart-outline'} size={20} color="#D94F30" />
         <Text style={styles.saveLabel}>{saved ? 'Saved' : 'Save'}</Text>
       </Pressable>
-      {(error || edgeError) && <Text style={globalStyles.error}>{error || edgeError}</Text>}
+      {picked ? (
+        <Pressable
+          style={[globalStyles.button, styles.againButton]}
+          onPress={pickAgain}
+          disabled={picking}
+          accessibilityRole="button"
+          accessibilityLabel="Try again"
+        >
+          <Text style={globalStyles.buttonText}>Try again</Text>
+        </Pressable>
+      ) : null}
+      {(error || edgeError || pickError) && (
+        <Text style={globalStyles.error}>{error || edgeError || pickError}</Text>
+      )}
       {recipeData && <RecipeDetails recipeData={recipeData} />}
     </View>
   );
@@ -96,6 +158,12 @@ const Recipe = ({ route }) => {
 const styles = StyleSheet.create({
   recipeContainer: {
     flex: 1,
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFCF5',
   },
   saveButton: {
     alignSelf: 'center',
@@ -110,6 +178,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'WorkSans-Medium',
     color: '#3A5743',
+  },
+  againButton: {
+    alignSelf: 'center',
+    marginTop: 4,
+    marginBottom: 12,
   },
 })
 

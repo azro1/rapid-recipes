@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootDrawerNavigator from './routes/drawer'
 import { FavouritesProvider } from './context/FavouritesContext'
 
@@ -39,12 +40,14 @@ const App = () => {
   if (!ready) return <View style={{ flex: 1, backgroundColor: '#FFFCF5' }} />
 
   return (
-    <FavouritesProvider>
-      <NavigationContainer theme={navTheme}>
-        <StatusBar />
-        <RootDrawerNavigator />
-      </NavigationContainer>
-    </FavouritesProvider>
+    <SafeAreaProvider>
+      <FavouritesProvider>
+        <NavigationContainer theme={navTheme}>
+          <StatusBar />
+          <RootDrawerNavigator />
+        </NavigationContainer>
+      </FavouritesProvider>
+    </SafeAreaProvider>
   );
 }
 

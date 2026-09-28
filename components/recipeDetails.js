@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ScrollView, View, Text, Image, StyleSheet, Pressable, Linking, FlatList } from 'react-native'
+import { ScrollView, View, Text, Image, StyleSheet, Pressable, Linking, FlatList, useWindowDimensions } from 'react-native'
 import { ChevronsLeftRight } from 'lucide-react-native'
 import { supabase } from '../db/config'
 
@@ -52,9 +52,14 @@ const getSteps = (instructions) => {
   return paragraphs.map(finishStep).filter(Boolean)
 }
 
+const CARD_GAP = 12
+const instructionCardHeight = (screenHeight) => Math.round(Math.min(360, Math.max(260, screenHeight * 0.4)))
+
 const InstructionCards = ({ recipeId, instructions }) => {
   const [savedSteps, setSavedSteps] = useState(null)
   const [pageWidth, setPageWidth] = useState(0)
+  const { height: screenHeight } = useWindowDimensions()
+  const cardHeight = instructionCardHeight(screenHeight)
 
   useEffect(() => {
     let live = true
@@ -91,15 +96,23 @@ const InstructionCards = ({ recipeId, instructions }) => {
             pagingEnabled
             nestedScrollEnabled
             showsHorizontalScrollIndicator={false}
-            style={styles.stepList}
+            style={[styles.stepList, { height: cardHeight }]}
             keyExtractor={(_, index) => String(index)}
+            getItemLayout={(_, index) => ({ length: pageWidth, offset: pageWidth * index, index })}
             renderItem={({ item, index }) => (
               <View
-                style={[styles.stepPage, { width: pageWidth }]}
+                style={[styles.stepPage, { width: pageWidth - CARD_GAP, height: cardHeight, marginRight: CARD_GAP }]}
                 accessible
                 accessibilityLabel={`Step ${index + 1} of ${steps.length}. ${item}`}
               >
-                <Text style={styles.stepText}>{`${index + 1}. ${item}`}</Text>
+                <ScrollView
+                  nestedScrollEnabled
+                  directionalLockEnabled
+                  showsVerticalScrollIndicator
+                  style={{ height: cardHeight - 28 }}
+                >
+                  <Text style={styles.stepText}>{`${index + 1}. ${item}`}</Text>
+                </ScrollView>
               </View>
             )}
           />
@@ -240,6 +253,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 14,
+    justifyContent: 'flex-start',
+    overflow: 'hidden',
   },
   stepText: {
     fontSize: 17,

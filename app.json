@@ -34,6 +34,12 @@
         }
       ],
       "expo-status-bar"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7b7c51e7-b9a7-4a5f-94b5-9a5283b6d471"
+      }
+    },
+    "owner": "azro"
   }
 }
